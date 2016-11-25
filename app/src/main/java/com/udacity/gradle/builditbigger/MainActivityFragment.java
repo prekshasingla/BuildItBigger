@@ -1,5 +1,6 @@
 package com.udacity.gradle.builditbigger;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.MyClass;
+import com.example.mylibrary.JokeActivity;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
@@ -42,7 +44,12 @@ public class MainActivityFragment extends Fragment {
                 new View.OnClickListener() {
                     public void onClick(View view) {
 
-                        Toast.makeText(getActivity(), new MyClass().getJoke(), Toast.LENGTH_LONG).show();
+                        String joke=new MyClass().getJoke();
+                        //Toast.makeText(getActivity(), joke, Toast.LENGTH_LONG).show();
+
+                        Intent intent = new Intent(getActivity(), JokeActivity.class);
+                        intent.putExtra("joke", joke);
+                        startActivity(intent);
 
 
                     }
@@ -51,4 +58,5 @@ public class MainActivityFragment extends Fragment {
 
                         return root;
     }
+
 }
