@@ -5,7 +5,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.MyClass;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
@@ -31,6 +36,19 @@ public class MainActivityFragment extends Fragment {
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .build();
         mAdView.loadAd(adRequest);
-        return root;
+
+        Button b=(Button) root.findViewById(R.id.button);
+        b.setOnClickListener(
+                new View.OnClickListener() {
+                    public void onClick(View view) {
+
+                        Toast.makeText(getActivity(), new MyClass().getJoke(), Toast.LENGTH_LONG).show();
+
+
+                    }
+
+                });
+
+                        return root;
     }
 }
