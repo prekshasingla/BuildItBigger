@@ -7,11 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.MyClass;
 import com.example.mylibrary.JokeActivity;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -20,7 +17,7 @@ import com.google.android.gms.ads.AdView;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment {
+public class MainActivityFragment extends Fragment implements ReceivedListener {
 
     public MainActivityFragment() {
     }
@@ -44,13 +41,12 @@ public class MainActivityFragment extends Fragment {
                 new View.OnClickListener() {
                     public void onClick(View view) {
 
-                        String joke=new MyClass().getJoke();
+                        //String joke=new MyClass().getJoke();
                         //Toast.makeText(getActivity(), joke, Toast.LENGTH_LONG).show();
-
-                        Intent intent = new Intent(getActivity(), JokeActivity.class);
-                        intent.putExtra("joke", joke);
-                        startActivity(intent);
-
+                        //Intent intent = new Intent(getActivity(), JokeActivity.class);
+                        //intent.putExtra("joke", joke);
+                        //startActivity(intent);
+                        new EndpointsAsyncTask().execute(MainActivityFragment.this);
 
                     }
 
@@ -58,5 +54,15 @@ public class MainActivityFragment extends Fragment {
 
                         return root;
     }
+
+    public void onReceive(String joke) {
+
+        Intent intent = new Intent(getActivity(), JokeActivity.class);
+        intent.putExtra("joke", joke);
+        startActivity(intent);
+
+        //Toast.makeText(getContext(), joke, Toast.LENGTH_SHORT).show();
+    }
+
 
 }
